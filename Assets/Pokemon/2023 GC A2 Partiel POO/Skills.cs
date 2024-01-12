@@ -46,4 +46,12 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     {
         public MagicalGrass() : base(TYPE.GRASS, 70, StatusPotential.SLEEP) { }
     }
+
+    /// <summary>
+    /// Attaque plante qui inflige le statut CRAZY
+    /// </summary>
+    public class TwitterIsNoMore : Skill
+    {
+        public TwitterIsNoMore() : base(TYPE.NORMAL, 70, StatusPotential.CRAZY) { }
+    }
 }

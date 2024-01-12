@@ -6,7 +6,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     /// </summary>
     public class Equipment
     {
-        public Equipment(int bonusHealth, int bonusAttack, int bonusDefense, int bonusSpeed, bool bonusFirstAttack)
+        public Equipment(int bonusHealth, int bonusAttack, int bonusDefense, int bonusSpeed, bool bonusFirstAttack = false)
         {
             BonusHealth = bonusHealth;
             BonusAttack = bonusAttack;
@@ -19,7 +19,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         public int BonusAttack { get; protected set; }
         public int BonusDefense { get; protected set; }
         public int BonusSpeed { get; protected set; }
-        public int BonusFirstAttack { get; protected set; }
+        public bool BonusFirstAttack { get; protected set; }
 
     }
 }

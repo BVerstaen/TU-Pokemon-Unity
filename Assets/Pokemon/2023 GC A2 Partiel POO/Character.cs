@@ -144,13 +144,28 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="NotImplementedException"></exception>
         public void ReceiveAttack(Skill s)
         {
-            CurrentHealth -= (s.Power - Defense);
+            if(s == null)
+                throw new ArgumentNullException("No skill to recieve damage !");
+
+            int finalAttack = s.Power - Defense;
+            if (finalAttack < 0) // could heal the character
+            {
+                finalAttack = 0;
+            }
+
+            CurrentHealth -= finalAttack;
+            CurrentStatus = StatusEffect.GetNewStatusEffect(s.Status);
         }
         /// <summary>
         /// Ajoute une certaine quantité de vie au personnage
         /// </summary>
         public void Heal(int amount)
         {
+            if(amount < 0)
+            {
+                throw new ArgumentException("heal amount can't be negative !");
+            }
+
             CurrentHealth += amount;
         }
 
@@ -163,7 +178,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             if(newEquipment == null)
             {
-                throw new System.ArgumentNullException("No equipement to equip !");
+                throw new ArgumentNullException("No equipement to equip !");
             }
 
             CurrentEquipment = newEquipment;
@@ -176,5 +191,34 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             CurrentEquipment = null;
         }
 
+        public void AttackSelf()
+        {
+            if(CurrentStatus == null)
+                throw new Exception("Current status is null");
+
+            if ((CurrentStatus.DamageOnAttack <= 0.0f) && (CurrentStatus.DamageOnAttack > 1.0f))
+                throw new Exception("Current status doesn't have a correct DamageOnAttack value");
+
+
+            CurrentHealth -= Mathf.RoundToInt(Attack * CurrentStatus.DamageOnAttack);
+        }
+
+        public void EndTurn()
+        {
+            if (CurrentStatus == null)
+                return;
+
+            CurrentStatus.EndTurn();
+            if (CurrentStatus.RemainingTurn == 0)
+            {
+                CurrentStatus = null;
+            }
+
+            //Check Burn Effect
+            if (CurrentStatus is BurnStatus)
+            {
+                CurrentHealth -= CurrentStatus.DamageEachTurn;
+            }
+        }
     }
 }

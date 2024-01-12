@@ -1,4 +1,7 @@
 ﻿
+using JetBrains.Annotations;
+using UnityEngine;
+
 namespace _2023_GC_A2_Partiel_POO.Level_2
 {
     /// <summary>
@@ -95,7 +98,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     /// </summary>
     public class CrazyStatus : StatusEffect
     {
-        public CrazyStatus() : base(1, 0, false, 0.3f)
+        public CrazyStatus() : base(2, 0, false, 0.3f)
         {
         }
     }
