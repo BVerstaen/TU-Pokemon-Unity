@@ -12,7 +12,6 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
         // À présent c'est à toi de créer les TU sur le reste et de les implémenter
 
         // Ce que tu peux ajouter:
-        // - Ajouter davantage de sécurité sur les tests apportés
         // - Gérer la notion de force/faiblesse avec les différentes attaques à disposition (skills.cs)
         // - Cumuler les force/faiblesses en ajoutant un type pour l'équipement qui rendrait plus sensible/résistant à un type
         [Test]
@@ -126,28 +125,31 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
             Assert.IsTrue(pikachu.CurrentHealth == _oldHealth - pikachu.CurrentStatus.DamageEachTurn);
         }
 
-        public void PokemonCanBeCrazyAndAttackSelf()
-        {
-            Character pikachu = new Character(100, 50, 50, 20, TYPE.NORMAL);
-            Character bulbizarre = new Character(30, 0, 0, 200, TYPE.NORMAL);
-            Fight f = new Fight(pikachu, bulbizarre);
-            TwitterIsNoMore c = new TwitterIsNoMore();
-            Punch p = new Punch();
+        //[Test]
+        //public void PokemonCanBeCrazyAndAttackSelf()
+        //{
+        //    Character pikachu = new Character(100, 50, 100, 20, TYPE.NORMAL); // High defense to resist bulbizarre punch
+        //    Character bulbizarre = new Character(30, 0, 0, 200, TYPE.NORMAL);
+        //    Fight f = new Fight(pikachu, bulbizarre);
+        //    TwitterIsNoMore c = new TwitterIsNoMore();
+        //    Punch p = new Punch();
 
-            f.OnEndTurn += pikachu.EndTurn;
-            f.OnEndTurn += bulbizarre.EndTurn;
+        //    f.OnEndTurn += pikachu.EndTurn;
+        //    f.OnEndTurn += bulbizarre.EndTurn;
 
-            int _oldHealth = pikachu.CurrentHealth;
+        //    int _oldBulbizarreHealth = bulbizarre.CurrentHealth;
+        //    int _oldHealth = pikachu.CurrentHealth;
 
-            f.ExecuteTurn(p, c);
+        //    f.ExecuteTurn(p, c);
 
-            f.OnEndTurn -= pikachu.EndTurn;
-            f.OnEndTurn -= bulbizarre.EndTurn;
+        //    f.OnEndTurn -= pikachu.EndTurn;
+        //    f.OnEndTurn -= bulbizarre.EndTurn;
 
 
-            //bulbizarre didn't recieve any attack & pickachu took both bulbizare & self damage
-            Debug.Log(_oldHealth - pikachu.CurrentStatus.DamageOnAttack);
-            Assert.IsTrue(pikachu.CurrentHealth == _oldHealth - pikachu.CurrentStatus.DamageOnAttack);
-        }
+        //    //bulbizarre didn't receive any attack & pickachu took only self damage
+        //    Assert.That(pikachu.CurrentStatus is CrazyStatus);
+        //    Assert.That(bulbizarre.CurrentHealth, Is.EqualTo(_oldBulbizarreHealth));
+        //    //Assert.IsTrue(pikachu.CurrentHealth == _oldHealth - Mathf.RoundToInt(pikachu.Attack * pikachu.CurrentStatus.DamageOnAttack));
+        //}
     }
 }

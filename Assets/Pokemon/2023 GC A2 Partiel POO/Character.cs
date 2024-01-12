@@ -199,7 +199,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             if ((CurrentStatus.DamageOnAttack <= 0.0f) && (CurrentStatus.DamageOnAttack > 1.0f))
                 throw new Exception("Current status doesn't have a correct DamageOnAttack value");
 
-
+            Debug.Log("ok");
             CurrentHealth -= Mathf.RoundToInt(Attack * CurrentStatus.DamageOnAttack);
         }
 
